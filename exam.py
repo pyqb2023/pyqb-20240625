@@ -41,7 +41,7 @@ pass
 
 # ### Exercise 2 (max 5 points)
 #
-# Make a figure with a scatterplot of the `X` and `Y` values; each point should be colored according its `subarea`. Use a proper title and a legend (Hint: https://matplotlib.org/3.8.2according/gallery/lines_bars_and_markers/scatter_with_legend.html).
+# Make a figure with a scatterplot of the `X` and `Y` values; each point should be colored according its `subarea`. Use a proper title and a legend (Hint: https://matplotlib.org/3.8.2/gallery/lines_bars_and_markers/scatter_with_legend.html).
 #
 
 pass
@@ -56,9 +56,8 @@ pass
 
 # ### Exercise 4 (max 6 points)
 #
-# Consider again the `X` and `Y` columns as the coordinates in a plane. Compute the average distance of each bird with respect to the other birds collected in the same subarea. (Hint: the magnitude of the result should be 4.4e06 for each subarea).
+# Consider again the `X` and `Y` columns as the coordinates in a plane. Compute the average distance of each bird with respect to the other birds collected in the same subarea. (Hint: the magnitude of the result should be ~thousands for each subarea).
 #
-# To get the full marks avoid the use of explicit loops.
 
 pass
 
