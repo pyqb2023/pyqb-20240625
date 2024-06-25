@@ -47,7 +47,7 @@ data.head()
 
 # ### Exercise 2 (max 5 points)
 #
-# Make a figure with a scatterplot of the `X` and `Y` values; each point should be colored according its `subarea`. Use a proper title and a legend (Hint: https://matplotlib.org/3.8.2according/gallery/lines_bars_and_markers/scatter_with_legend.html).
+# Make a figure with a scatterplot of the `X` and `Y` values; each point should be colored according its `subarea`. Use a proper title and a legend (Hint: https://matplotlib.org/3.8.2/gallery/lines_bars_and_markers/scatter_with_legend.html).
 #
 
 # +
@@ -81,12 +81,20 @@ def distance(a: tuple[float, float], b: tuple[float, float], w: float) -> float:
 
 # ### Exercise 4 (max 6 points)
 #
-# Consider again the `X` and `Y` columns as the coordinates in a plane. Compute the average distance of each bird with respect to the other birds collected in the same subarea. (Hint: the magnitude of the result should be 4.4e06 for each subarea).
+# Consider again the `X` and `Y` columns as the coordinates in a plane. Compute the average distance of each bird with respect to the other birds collected in the same subarea. (Hint: the magnitude of the result should be ~thousands for each subarea).
 #
-# To get the full marks avoid the use of explicit loops.
 
-subarea_avg = data.groupby("subarea")[['X','Y']].apply(lambda d: d.apply(lambda r: distance(r['X'], r['Y'], 1), axis=1).mean())
+# +
+def pairwise_distances(df: pd.DataFrame) -> np.ndarray:
+    result = []
+    for i, _ in enumerate(df.index):
+        for j in range(i+1, len(df.index)):
+            result.append(distance(tuple(df.iloc[i][['X','Y']]), tuple(df.iloc[j][['X','Y']]), 1))
+    return np.array(result)
+
+subarea_avg = data.groupby("subarea")[['X','Y']].apply(lambda d: pairwise_distances(d).mean())
 subarea_avg
+# -
 
 
 # ### Exercise 5 (max 2 points)
@@ -98,7 +106,7 @@ ss.index = data.index
 data['avg_subarea_dist'] = ss
 data.head()
 
-# ### Exercise 6 (max 3 points)
+# ### Exercise 6 (max 4 points)
 #
 # Plot a pie chart of the `functional_insectivores_species`. Each slice should have a proper label and report the corresponding proportion with one decimal digit (e.g., the slice for `functional_insectivores_species` number 8 should report 14.1%, since there are 19 occurrences and 135 records).
 
@@ -122,7 +130,7 @@ ax.set_title('grassland')
 _ = ax.legend()
 
 
-# ### Exercise 8 (max 5 points)
+# ### Exercise 8 (max 4 points)
 #
 # Given a random variable $x$, its **standardized** value is $\frac{x - \bar x}{\sigma_x}$, where $\bar x$ is the mean of $x$, and $\sigma_x$ its standard deviation. 
 #
